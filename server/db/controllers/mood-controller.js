@@ -1,6 +1,6 @@
 const Mood = require('../models/mood-model')
 
-createMood = (req, res) => {
+const createMood = (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -36,7 +36,7 @@ createMood = (req, res) => {
   })
 }
 
-updateMood = async (req, res) => {
+const updateMood = async (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -76,6 +76,49 @@ updateMood = async (req, res) => {
   })
 }
 
-deleteMood = async (res, req) => {
-  await Mood.
+const deleteMood = async (res, req) => {
+  await Mood.findOneAndDelete({ _id: req.params.id }, (err, mood) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err })
+    }
+
+    if (!mood) {
+      return res.status(404).json({ success: false, error: 'Mood not found' })
+    }
+
+    return res.status(200).json({ success: true, data: mood })
+  }).catch(err => console.log(err))
+}
+
+const getMoodById = async (req, res) => {
+  await Mood.findOne({ _id: req.params.id }, (err, mood) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err })
+    }
+
+    if (!mood) {
+      return res.status(404).json({ success: false, error: 'Mood not found' })
+    }
+    return res.status(200).json({ success: true, data: mood })
+  }).catch(err => console.log(err))
+}
+
+const getMoods = async (req, res) => {
+  await Mood.find({}, (err, moods) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err })
+    }
+    if (!moods.length) {
+      return res.status(404).json({ success: false, error: 'Mood not found' })
+    }
+    return res.status(200).json({ success: true, data: moods })
+  }).catch(err => console.log(err))
+}
+
+module.exports = {
+  createMood,
+  updateMood,
+  deleteMood,
+  getMoods,
+  getMoodById,
 }
