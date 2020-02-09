@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
 import api from '../api'
 
 const DashboardPage = () => {
@@ -14,7 +16,9 @@ const DashboardPage = () => {
   return (
     <div className="dashboard__container">
       <h1 className="dashboard__header">Dashboard</h1>
-      {JSON.stringify(moods)}
+      <Link to="/mood-logger">
+        <button className="button-cta">Log your mood</button>
+      </Link>
     </div>
   )
 }

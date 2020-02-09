@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { SCALE } from '../config/index.js'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
+
+import { SCALE } from '../config/index.js'
 
 const MoodInput = ({ emotion }) => {
   const [value, setValue] = useState(0)
