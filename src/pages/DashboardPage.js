@@ -10,7 +10,6 @@ const DashboardPage = () => {
       })
     }
     fetchMoods()
-    console.log(moods)
   }, [])
   return (
     <div className="dashboard__container">
