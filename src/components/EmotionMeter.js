@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { SCALE } from '../config/index.js'
+import { SCALE, TEST_DELAY } from '../config'
 
 const EmotionMeter = ({ order, emotion, activeInput, setActiveInput }) => {
   const [value, setValue] = useState(0)
@@ -10,7 +10,7 @@ const EmotionMeter = ({ order, emotion, activeInput, setActiveInput }) => {
   const handleInputChange = index => () => {
     setValue(index)
     markAsTouched(true)
-    setTimeout(() => setActiveInput(order + 1), 1000)
+    setTimeout(() => setActiveInput(order + 1), TEST_DELAY)
   }
 
   return (
