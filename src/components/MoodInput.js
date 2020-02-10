@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 
@@ -30,6 +31,13 @@ const MoodInput = ({ index, emotion, activeInput, setActiveInput }) => {
       />
     </div>
   )
+}
+
+MoodInput.propTypes = {
+  index: PropTypes.number,
+  emotion: PropTypes.string,
+  activeInput: PropTypes.number,
+  setActiveInput: PropTypes.func,
 }
 
 export default MoodInput
