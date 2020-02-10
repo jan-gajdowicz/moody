@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import MoodInput from '../components/MoodInput'
+import EmotionMeter from '../components/EmotionMeter'
 import { EMOTIONS } from '../config'
 
 const MoodLoggerForm = () => {
@@ -12,11 +12,11 @@ const MoodLoggerForm = () => {
   return (
     <div className="mood-logger-form__container">
       {EMOTIONS.map((emotion, index) => (
-        <MoodInput
+        <EmotionMeter
           activeInput={activeInput}
           emotion={emotion}
-          index={index}
           key={index}
+          order={index}
           setActiveInput={handleInputChange}
         />
       ))}
