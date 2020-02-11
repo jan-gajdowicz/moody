@@ -6,7 +6,9 @@ import { SCALE, TEST_DELAY } from '../config'
 const EmotionMeter = ({ order, emotion: { name }, activeInput, setEmotion, setActiveInput }) => {
   const [value, setValue] = useState(0)
   const [touched, markAsTouched] = useState(false)
+
   const active = activeInput === order ? '--active' : ''
+
   const handleInputChange = index => () => {
     setValue(index)
     markAsTouched(true)

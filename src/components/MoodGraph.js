@@ -1,59 +1,44 @@
-import React, { useState } from 'react'
-import { CartesianGrid, XAxis, Line, YAxis, Tooltip, LineChart } from 'recharts'
-import { EMOTIONS } from '../config'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { CartesianGrid, XAxis, Area, AreaChart, YAxis, Tooltip } from 'recharts'
 
-const MoodGraph = ({ moods }) => {
-  const [filters, setFilters] = useState(EMOTIONS)
-
-  const isInFilters = emotion => filters.includes(emotion)
-
-  const filterEmotions = emotion => () => {
-    if (isInFilters(emotion)) {
-      return setFilters(filters.filter(filter => filter !== emotion))
-    }
-    setFilters([...filters, emotion])
-  }
+const MoodGraph = ({ moods, filters }) => {
   return (
     <div className="mood-graph__container">
-      <div className="mood-graph__filters">
-        {JSON.stringify(filters)}
-        {EMOTIONS.map((emotion, index) => {
-          const { name, color } = emotion
-          return (
-            <div
-              className="mood-graph__filter"
-              key={index}
-              style={{ border: `1px solid ${color}` }}
-            >
-              <input
-                checked={isInFilters(emotion)}
-                id={name}
-                name={name}
-                onChange={filterEmotions(emotion)}
-                type="checkbox"
-              />
-              <label htmlFor={name}>{name}</label>
-            </div>
-          )
-        })}
-      </div>
-      <LineChart data={moods} height={400} width={800}>
+      <AreaChart data={moods} height={400} width={800}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="emotions.date" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
+        <defs>
+          {filters.map(({ name, color }, index) => (
+            <linearGradient id={color} key={index} x1="0" x2="0" y1="0" y2="1">
+              <stop offset="5%" stopColor={color} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={color} stopOpacity={0} />
+            </linearGradient>
+          ))}
+        </defs>
         {filters.map(({ name, color }, index) => (
-          <Line
+          <Area
             dataKey={`emotions.${name}`}
+            fill={`url(#${color})`}
+            fillOpacity={1}
+            isAnimationActive={false}
             key={index}
+            name={name}
             stroke={color}
-            strokeWidth={3}
+            strokeWidth={1}
             type="monotone"
           />
         ))}
-      </LineChart>
+      </AreaChart>
     </div>
   )
+}
+
+MoodGraph.propTypes = {
+  moods: PropTypes.array,
+  filters: PropTypes.array,
 }
 
 export default MoodGraph
