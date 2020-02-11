@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
 
 import { AppContext } from '../contexts/AppContext'
 
+import MoodLogger from './../components/MoodLogger'
 import api from '../api'
 
 const DashboardPage = () => {
-  const {
-    appData: { some },
-  } = useContext(AppContext)
   const [moods, setMoods] = useState([])
+
+  const {
+    appData: { showMoodLogger, someField },
+    handleAppDataChange,
+  } = useContext(AppContext)
+
+  const handleButtonClick = () => handleAppDataChange({ showMoodLogger: true, someField: 'false' })
+
   useEffect(() => {
     async function fetchMoods() {
       await api.getAllMoods().then(response => {
@@ -18,13 +23,12 @@ const DashboardPage = () => {
     }
     fetchMoods()
   }, [])
+
   return (
     <div className="dashboard__container">
       <h1 className="dashboard__header">Dashboard</h1>
-      {some}
-      <Link to="/mood-logger">
-        <button className="button-cta">Log your mood</button>
-      </Link>
+      {showMoodLogger && <MoodLogger />}
+      <button onClick={handleButtonClick}>Log your mood</button>
     </div>
   )
 }

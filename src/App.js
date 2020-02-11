@@ -6,7 +6,6 @@ import { AppDataProvider } from './contexts/AppContext'
 import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import MoodLogger from './pages/MoodLogger'
 
 import './App.sass'
 
@@ -24,9 +23,6 @@ function App() {
             </Route>
             <Route exact path="/dashboard">
               <DashboardPage />
-            </Route>
-            <Route exact path="/mood-logger">
-              <MoodLogger />
             </Route>
           </Switch>
         </BrowserRouter>

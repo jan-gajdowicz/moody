@@ -1,16 +1,17 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 import PropTypes from 'prop-types'
 
 const AppContext = createContext()
 
 const AppDataProvider = ({ children }) => {
-  const data = {
-    some: 'ddddd',
+  const state = {
+    showMoodLogger: false,
   }
-  const [appData, setAppData] = useState(data)
 
-  const handleAppDataChange = data => {
-    setAppData(...data)
+  const [appData, setAppData] = useState(state)
+
+  const handleAppDataChange = payload => {
+    setAppData({ ...appData, ...payload })
   }
 
   return (

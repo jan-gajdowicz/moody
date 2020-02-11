@@ -19,21 +19,21 @@ const createMood = (req, res) => {
     })
   }
 
-  mood.save().then(() => {
-    return res
-      .status(201)
-      .json({
+  mood
+    .save()
+    .then(() => {
+      return res.status(201).json({
         success: true,
         id: mood._id,
         message: 'Mood created.',
       })
-      .catch(error => {
-        return res.status(400).json({
-          error,
-          message: 'Mood not created!',
-        })
+    })
+    .catch(error => {
+      return res.status(400).json({
+        error,
+        message: 'Mood not created!',
       })
-  })
+    })
 }
 
 const updateMood = async (req, res) => {
