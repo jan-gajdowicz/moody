@@ -19,17 +19,17 @@ const GraphFilters = ({ updateFilters }) => {
   return (
     <div className="graph-filters__container">
       <div className="graph-filters__filters">
-        <div className="graph-filters__header">Show selected:</div>
+        <div className="graph-filters__header">Filter:</div>
         {EMOTIONS.map((emotion, index) => {
           const { name, color } = emotion
           const style = isInFilters(emotion)
             ? {
-                border: `1px solid ${color}`,
+                border: `2px solid ${color}`,
                 color: `${color}`,
-                background: `linear-gradient(transparent 0%, ${color} 300%)`,
+                background: `linear-gradient(${color} -900%, transparent 100%)`,
               }
             : {
-                border: '1px solid #ccc',
+                border: '2px solid #ccc',
                 color: '#bbb',
                 background: '#eee',
               }

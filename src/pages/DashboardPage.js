@@ -6,6 +6,7 @@ import api from '../api'
 import MoodLogger from './../components/MoodLogger'
 import MoodGraph from '../components/MoodGraph'
 import GraphFilters from '../components/GraphFilters'
+import NavHeader from '../components/NavHeader'
 
 const DashboardPage = () => {
   const [moods, setMoods] = useState([])
@@ -33,13 +34,14 @@ const DashboardPage = () => {
   )
 
   return (
-    <div className="dashboard__container">
-      <h1 className="dashboard__header">Dashboard</h1>
-      <GraphFilters updateFilters={updateFilters} />
-      <MoodGraph filters={filters} moods={moods} />
-      {showMoodLogger && <MoodLogger />}
-      <button onClick={handleButtonClick}>Log your mood</button>
-    </div>
+    <>
+      <NavHeader />
+      <div className="dashboard__container">
+        <GraphFilters updateFilters={updateFilters} />
+        <MoodGraph filters={filters} moods={moods} />
+        {showMoodLogger && <MoodLogger />}
+      </div>
+    </>
   )
 }
 
