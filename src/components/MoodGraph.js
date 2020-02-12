@@ -13,7 +13,7 @@ const MoodGraph = ({ moods, filters }) => {
         <defs>
           {filters.map(({ name, color }, index) => (
             <linearGradient id={color} key={index} x1="0" x2="0" y1="0" y2="1">
-              <stop offset="5%" stopColor={color} stopOpacity={0.8} />
+              <stop offset="5%" stopColor={color} stopOpacity={0.2} />
               <stop offset="95%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           ))}
@@ -27,7 +27,7 @@ const MoodGraph = ({ moods, filters }) => {
             key={index}
             name={name}
             stroke={color}
-            strokeWidth={1}
+            strokeWidth={2}
             type="monotone"
           />
         ))}
