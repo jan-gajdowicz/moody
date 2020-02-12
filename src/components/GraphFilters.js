@@ -19,7 +19,6 @@ const GraphFilters = ({ updateFilters }) => {
   return (
     <div className="graph-filters__container">
       <div className="graph-filters__filters">
-        <div className="graph-filters__header">Filter:</div>
         {EMOTIONS.map((emotion, index) => {
           const { name, color } = emotion
           const style = isInFilters(emotion)
@@ -31,7 +30,7 @@ const GraphFilters = ({ updateFilters }) => {
             : {
                 border: '2px solid #ccc',
                 color: '#bbb',
-                background: '#eee',
+                background: 'transparent',
               }
           return (
             <label className="graph-filters__filter" htmlFor={name} key={index} style={style}>

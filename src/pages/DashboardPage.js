@@ -6,39 +6,50 @@ import api from '../api'
 import MoodLogger from './../components/MoodLogger'
 import MoodGraph from '../components/MoodGraph'
 import GraphFilters from '../components/GraphFilters'
+import GraphScope from '../components/GraphScope'
 import NavHeader from '../components/NavHeader'
+import { DEFAULT_SCOPE } from '../config'
 
 const DashboardPage = () => {
+  const sliceMoods = scope => {
+    return scope ? moods.slice(Math.max(moods.length - scope, 0)) : moods
+  }
   const [moods, setMoods] = useState([])
   const [filters, setFilters] = useState([])
+  const [scopedMoods, setScopedMoods] = useState(sliceMoods(DEFAULT_SCOPE))
 
   const {
     appData: { showMoodLogger },
-    handleAppDataChange,
   } = useContext(AppContext)
 
-  const handleButtonClick = () => handleAppDataChange({ showMoodLogger: true, someField: 'false' })
-
   const updateFilters = filters => setFilters(filters)
+  const updateScope = scope => setScopedMoods(sliceMoods(scope))
+
+  useEffect(() => {
+    async function fetchMoods() {
+      await api.getAllMoods().then(response => {
+        setMoods(response.data.data)
+      })
+    }
+    fetchMoods()
+  }, [])
 
   useEffect(
     () => {
-      async function fetchMoods() {
-        await api.getAllMoods().then(response => {
-          setMoods(response.data.data)
-        })
-      }
-      fetchMoods()
+      setScopedMoods(sliceMoods(DEFAULT_SCOPE))
     },
-    [showMoodLogger === false],
+    [moods],
   )
 
   return (
     <>
       <NavHeader />
       <div className="dashboard__container">
-        <GraphFilters updateFilters={updateFilters} />
-        <MoodGraph filters={filters} moods={moods} />
+        <div className="dashboard__filters">
+          <GraphFilters updateFilters={updateFilters} />
+          <GraphScope updateScope={updateScope} />
+        </div>
+        <MoodGraph filters={filters} scopedMoods={scopedMoods} />
         {showMoodLogger && <MoodLogger />}
       </div>
     </>
