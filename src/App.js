@@ -6,14 +6,15 @@ import { AppDataProvider } from './contexts/AppContext'
 import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import Layout from './components/Layout'
 
 import './App.sass'
 
 function App() {
   return (
-    <div className="app__container">
-      <AppDataProvider>
-        <BrowserRouter>
+    <AppDataProvider>
+      <BrowserRouter>
+        <Layout>
           <Switch>
             <Route exact path="/">
               <HomePage />
@@ -25,9 +26,9 @@ function App() {
               <DashboardPage />
             </Route>
           </Switch>
-        </BrowserRouter>
-      </AppDataProvider>
-    </div>
+        </Layout>
+      </BrowserRouter>
+    </AppDataProvider>
   )
 }
 
