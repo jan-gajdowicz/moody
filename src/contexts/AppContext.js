@@ -6,6 +6,7 @@ const AppContext = createContext()
 const AppDataProvider = ({ children }) => {
   const state = {
     showMoodLogger: false,
+    screenMode: 'dark',
   }
 
   const [appData, setAppData] = useState(state)

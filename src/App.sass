@@ -7,13 +7,18 @@
 @import 'styles/graph-filters'
 @import 'styles/graph-scope'
 @import 'styles/dashboard'
-
-body
-  background: #222
-  color: #333
-  font-family: 'Roboto'
+@import 'styles/screen-mode'
 
 .app
   &__container
+    font-family: 'Roboto'
+    height: 100vh
+    color: #333
     padding: 20px
     text-align: center
+
+    &.dark
+      background: #222
+
+    &.light
+      background: #fff
