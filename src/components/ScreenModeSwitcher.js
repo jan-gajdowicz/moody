@@ -12,9 +12,9 @@ const ScreenModeSwitcher = ({ classProp }) => {
 
   const handleSwitcher = mode => () => handleScreenMode(mode)
 
-  const iconPath = screenMode === 'dark' ? MoonIcon : SunIcon
+  const iconPath = screenMode === '--dark' ? MoonIcon : SunIcon
 
-  const oppoScreenMode = screenMode === 'dark' ? 'light' : 'dark'
+  const oppoScreenMode = screenMode === '--dark' ? '--light' : '--dark'
 
   return (
     <>

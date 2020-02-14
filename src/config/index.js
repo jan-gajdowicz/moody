@@ -13,4 +13,5 @@ export const SCOPES = [
 export const DEFAULT_SCOPE = 7
 export const SCALE = [0, 1, 2, 3, 4, 5]
 export const TEST_DELAY = 500
-export const SCREEN_MODE = 'dark'
+export const SCREEN_MODE = '--dark'
+export const PRIMARY_COLOR = '#a88ee6'

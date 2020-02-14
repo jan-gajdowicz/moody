@@ -12,7 +12,7 @@ const TestComplete = () => {
   return (
     <div className="mood-logger">
       <div className="mood-logger__container">
-        <h1 className="mood-logger__header">Thanks!</h1>
+        <h1 className="mood-logger__header">Thank you</h1>
       </div>
     </div>
   )

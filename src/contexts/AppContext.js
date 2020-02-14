@@ -10,7 +10,7 @@ const AppDataProvider = ({ children }) => {
     : SCREEN_MODE
 
   const [screenMode, setScreenMode] = useState(initScreenMode)
-  const [showMoodLogger, toggleMoodLogger] = useState(true)
+  const [showMoodLogger, toggleMoodLogger] = useState(false)
 
   const handleMoodLogger = state => toggleMoodLogger(state)
   const handleScreenMode = mode => {
