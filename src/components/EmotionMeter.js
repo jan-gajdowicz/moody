@@ -32,13 +32,7 @@ const EmotionMeter = ({
       >
         {name}
       </h2>
-      <div
-        className="emotion-meter__field"
-        style={{
-          color: `${color}`,
-          background: `linear-gradient(90deg, transparent -20%, ${color} 100%)`,
-        }}
-      >
+      <div className="emotion-meter__field">
         {SCALE.map(rank => {
           return (
             <div key={rank}>
@@ -54,6 +48,10 @@ const EmotionMeter = ({
                 htmlFor="emotion"
                 key={rank}
                 onClick={handleInputChange(rank)}
+                style={{
+                  color: `${color}`,
+                  border: `2px solid ${color}`,
+                }}
               >
                 {rank}
               </label>

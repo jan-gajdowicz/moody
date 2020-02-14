@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
-import EmotionMeter from '../components/EmotionMeter'
-import TestCompleted from '../components/TestCompleted'
+import EmotionMeter from './EmotionMeter'
+import TestCompleted from './TestCompleted'
+import Icon from './Icon'
+import { CloseIcon } from '../assets/icons/close'
 
-import { EMOTIONS, SCALE } from '../config'
+import { EMOTIONS, SCALE, PRIMARY_COLOR } from '../config'
 import { insertMood } from '../api'
+import { AppContext } from '../contexts/AppContext'
 
-const MoodLoggerForm = () => {
+export default function MoodLoggerForm() {
   const date = new Date().toISOString()
   const [emotions, setEmotions] = useState()
   const [activeInput, setActiveInput] = useState(0)
@@ -17,6 +20,8 @@ const MoodLoggerForm = () => {
     emotions,
   }
 
+  const { handleMoodLogger } = useContext(AppContext)
+
   const setEmotion = emotion => {
     setEmotions({ ...emotions, ...emotion })
   }
@@ -25,6 +30,8 @@ const MoodLoggerForm = () => {
     setActiveInput(value)
   }
 
+  const handleCLose = () => handleMoodLogger(false)
+
   if (testComplete) {
     insertMood(mood)
     return <TestCompleted />
@@ -32,8 +39,10 @@ const MoodLoggerForm = () => {
 
   return (
     <div className="mood-logger">
+      <div className="mood-logger__close" onClick={handleCLose}>
+        <Icon color={PRIMARY_COLOR} path={CloseIcon} size={50} />
+      </div>
       <div className="mood-logger__container">
-        <h1 className="mood-logger__header">How is your...</h1>
         {EMOTIONS.map((emotion, index) => (
           <EmotionMeter
             activeInput={activeInput}
@@ -48,5 +57,3 @@ const MoodLoggerForm = () => {
     </div>
   )
 }
-
-export default MoodLoggerForm
