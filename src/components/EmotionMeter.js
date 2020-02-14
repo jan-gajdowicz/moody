@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 
 import { SCALE, TEST_DELAY } from '../config'
 
-const EmotionMeter = ({ order, emotion: { name }, activeInput, setEmotion, setActiveInput }) => {
+const EmotionMeter = ({
+  order,
+  emotion: { name, color },
+  activeInput,
+  setEmotion,
+  setActiveInput,
+}) => {
   const [value, setValue] = useState(0)
   const [touched, markAsTouched] = useState(false)
 
@@ -18,8 +24,21 @@ const EmotionMeter = ({ order, emotion: { name }, activeInput, setEmotion, setAc
 
   return (
     <div className={`emotion-meter__container${active}`}>
-      <h2 className="emotion-meter__header">{name}</h2>
-      <div className="emotion-meter__field">
+      <h2
+        className="emotion-meter__header"
+        style={{
+          color: `${color}`,
+        }}
+      >
+        {name}
+      </h2>
+      <div
+        className="emotion-meter__field"
+        style={{
+          color: `${color}`,
+          background: `linear-gradient(90deg, transparent -20%, ${color} 100%)`,
+        }}
+      >
         {SCALE.map(rank => {
           return (
             <div key={rank}>

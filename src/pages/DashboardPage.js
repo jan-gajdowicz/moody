@@ -18,9 +18,7 @@ const DashboardPage = () => {
   const [filters, setFilters] = useState([])
   const [scopedMoods, setScopedMoods] = useState(sliceMoods(DEFAULT_SCOPE))
 
-  const {
-    appData: { showMoodLogger },
-  } = useContext(AppContext)
+  const { showMoodLogger } = useContext(AppContext)
 
   const updateFilters = filters => setFilters(filters)
   const updateScope = scope => setScopedMoods(sliceMoods(scope))

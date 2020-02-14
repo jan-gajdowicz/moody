@@ -1,25 +1,18 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import SunIcon from './Icons/SunIcon'
-import MoonIcon from './Icons/MoonIcon'
+import Icon from './Icon'
+import { SunIcon } from '../assets/icons/sun'
+import { MoonIcon } from '../assets/icons/moon'
 
 import { AppContext } from '../contexts/AppContext'
 
 const ScreenModeSwitcher = ({ classProp }) => {
-  const {
-    appData: { screenMode },
-    handleAppDataChange,
-  } = useContext(AppContext)
+  const { screenMode, handleScreenMode } = useContext(AppContext)
 
-  const handleScreenModeSwitch = mode => () => handleAppDataChange({ screenMode: mode })
+  const handleSwitcher = mode => () => handleScreenMode(mode)
 
-  const Icon =
-    screenMode === 'dark' ? (
-      <SunIcon color="#a88ee6" size={16} />
-    ) : (
-      <MoonIcon color="#a88ee6" size={16} />
-    )
+  const iconPath = screenMode === 'dark' ? MoonIcon : SunIcon
 
   const oppoScreenMode = screenMode === 'dark' ? 'light' : 'dark'
 
@@ -27,9 +20,9 @@ const ScreenModeSwitcher = ({ classProp }) => {
     <>
       <div
         className={`screen-mode__switcher ${classProp}`}
-        onClick={handleScreenModeSwitch(oppoScreenMode)}
+        onClick={handleSwitcher(oppoScreenMode)}
       >
-        {Icon}
+        <Icon color="#a88ee6" path={iconPath} size={16} />
       </div>
     </>
   )

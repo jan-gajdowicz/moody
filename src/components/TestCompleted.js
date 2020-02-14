@@ -2,18 +2,20 @@ import React, { useEffect, useContext } from 'react'
 
 import { AppContext } from '../contexts/AppContext'
 
-const TestCompleted = () => {
-  const { handleAppDataChange } = useContext(AppContext)
+const TestComplete = () => {
+  const { handleMoodLogger } = useContext(AppContext)
 
   useEffect(() => {
-    setTimeout(() => handleAppDataChange({ showMoodLogger: false }), 2000)
+    setTimeout(() => handleMoodLogger(false), 2000)
   }, [])
 
   return (
-    <div className="mood-logger__container">
-      <h2 className="test-completed__header">Thanks!</h2>
+    <div className="mood-logger">
+      <div className="mood-logger__container">
+        <h1 className="mood-logger__header">Thanks!</h1>
+      </div>
     </div>
   )
 }
 
-export default TestCompleted
+export default TestComplete
