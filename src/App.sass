@@ -1,5 +1,6 @@
 @import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css'
 
+@import 'styles/variables'
 @import 'styles/emotion-meter'
 @import 'styles/mood-logger'
 @import 'styles/test-completed'
@@ -11,17 +12,16 @@
 
 .app
   &__container
-    font-family: 'Roboto'
+    font-family: $ffam
     height: 100vh
-    color: #333
-    padding: 20px
+    padding: $sdouble
     text-align: center
 
-    &.dark
-      background: #222
+    &.--dark
+      background: $cdark
 
-    &.light
-      background: #fff
+    &.--light
+      background: $clight
 
     &-inner
       max-width: 1200px
