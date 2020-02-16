@@ -10,7 +10,7 @@ const AppDataProvider = ({ children }) => {
     : SCREEN_MODE
 
   const [screenMode, setScreenMode] = useState(initScreenMode)
-  const [showWizzard, toggleWizzard] = useState(false)
+  const [showWizzard, toggleWizzard] = useState(true)
 
   const handleWizzard = state => toggleWizzard(state)
   const handleScreenMode = mode => {

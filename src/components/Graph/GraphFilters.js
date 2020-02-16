@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { EMOTIONS } from 'config'
+import { EMOTIONS, buttonStyle } from 'config'
 
 const GraphFilters = ({ updateFilters }) => {
   useEffect(() => updateFilters(filters))
@@ -21,17 +21,8 @@ const GraphFilters = ({ updateFilters }) => {
       <div className="graph-filters__filters">
         {EMOTIONS.map((emotion, index) => {
           const { name, color } = emotion
-          const style = isInFilters(emotion)
-            ? {
-                border: `2px solid ${color}`,
-                color: `${color}`,
-                background: `linear-gradient(${color} -900%, transparent 100%)`,
-              }
-            : {
-                border: '2px solid #ccc',
-                color: '#bbb',
-                background: 'transparent',
-              }
+          const style = buttonStyle(isInFilters(emotion), color)
+
           return (
             <label className="graph-filters__filter" htmlFor={name} key={index} style={style}>
               <input
