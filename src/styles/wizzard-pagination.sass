@@ -1,3 +1,14 @@
 .wizzard-pagination
   &__container
     padding-top: $squad * 3
+    position: absolute
+    display: flex
+    justify-content: center
+    width: 100%
+    animation: pagination 500ms
+
+    @keyframes pagination
+      0%
+        opacity: 0
+      100%
+        opacity: 1

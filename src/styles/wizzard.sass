@@ -19,6 +19,7 @@
     color: $cprimo
 
     &--secondary
+      animation: slideIn 1000ms
       font-weight: $flight
       color: $cprimo
       font-size: $fxxl
@@ -38,9 +39,20 @@
     font-weight: $fbold
     cursor: pointer
     font-size: 15px
-    background: transparent
     margin-left: 10px
     text-transform: uppercase
+    background: transparent
+    &--primary
+      border: $bstandard
+      padding: $sbase $sbase * 1.5
+      border-radius: $brad
+      font-weight: $fbold
+      cursor: pointer
+      font-size: 15px
+      margin-left: 10px
+      background: $cprimo
+      text-transform: uppercase
+      color: $cdark
 
   &__input
     &--text
@@ -60,3 +72,11 @@
 
 .--light .wizzard
   background: $clight
+
+  @keyframes slideIn
+    0%
+      opacity: 0
+      margin-left: -20px
+    100%
+      opacity: 1
+      margin-left: 0

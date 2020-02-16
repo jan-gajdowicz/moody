@@ -7,7 +7,7 @@ export const EMOTIONS = [
 export const COLORS = ['#ff0000', '#ffff00', '#00ffff', '#00ff00', '	#ff00ff']
 export const ONBOARD_STEPS = [
   { name: 'emotions', child: 'EmotionPicker', showPagination: true },
-  { name: 'scale', child: 'ScalePicker', showPagination: true },
+  // { name: 'scale', child: 'ScalePicker', showPagination: true },
   { name: 'time', child: 'TimePicker', showPagination: true },
 ]
 export const SCOPES = [

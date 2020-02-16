@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { EMOTIONS, COLORS, buttonStyle } from 'config'
 
+import WizzardPagination from 'components/Wizzard/WizzardPagination'
+
 export default function EmotionPicker(props) {
+  const { saveStep } = props
   const [emotions, setEmotions] = useState([])
+  const [pagination, setPagination] = useState(false)
   const [customEmotion, setCustomEmotion] = useState({})
   const [colorIndex, setColorIndex] = useState(0)
   const [feedback, setFeedback] = useState()
@@ -10,11 +14,15 @@ export default function EmotionPicker(props) {
     collection.length && collection.filter(elem => elem.name === element.name).length
 
   const addCustomEmotion = event => {
-    setFeedback('')
+    setFeedback(null)
+
     const {
       currentTarget: { value },
       key,
     } = event
+
+    if (!value) return false
+
     setCustomEmotion({ id: `userEmotion_${Date.now()}`, name: value, color: COLORS[colorIndex] })
 
     if (key === 'Enter') {
@@ -26,6 +34,7 @@ export default function EmotionPicker(props) {
       EMOTIONS.push(customEmotion)
       setColorIndex(colorIndex + 1)
       setCustomEmotion({ name: '' })
+      setPagination(true)
     }
   }
 
@@ -33,8 +42,12 @@ export default function EmotionPicker(props) {
     if (isInCollection(emotions, emotion)) {
       return setEmotions(emotions.filter(element => element.id !== emotion.id))
     }
+
     setEmotions([...emotions, emotion])
+    setPagination(true)
   }
+
+  const storeEmotions = () => saveStep('trackedEmotions', emotions)
 
   return (
     <div className="emotion-picker__container">
@@ -67,10 +80,8 @@ export default function EmotionPicker(props) {
           onKeyDown={addCustomEmotion}
           value={customEmotion.name}
         />
-        <button className="wizzard__button" onClick={addCustomEmotion}>
-          Add
-        </button>
         {feedback}
+        {pagination && <WizzardPagination {...props} onStepChange={storeEmotions} />}
       </div>
     </div>
   )

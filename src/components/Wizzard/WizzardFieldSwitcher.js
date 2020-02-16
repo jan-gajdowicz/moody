@@ -1,23 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import WizzardPagination from 'components/Wizzard/WizzardPagination'
-
 export default function WizzardFieldSwitcher(props) {
   const {
-    step: { child, showPagination },
+    step: { child },
     activeStep,
     order,
   } = props
   const module = require(`./../Onboarder/${child}`)
-  const showField = activeStep === order
   const WizzardField = module.default
+  const showField = activeStep === order
+
   return (
     <>
       {showField && (
         <div className="wizzard__field">
           <WizzardField {...props} />
-          {showPagination && <WizzardPagination {...props} />}
         </div>
       )}
     </>
