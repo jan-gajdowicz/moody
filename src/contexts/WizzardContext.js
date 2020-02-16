@@ -4,17 +4,18 @@ import PropTypes from 'prop-types'
 const WizzardContext = createContext()
 
 const WizzardProvider = ({ children }) => {
-  const [screenMode, setScreenMode] = useState()
-  const [showWizzard, toggleWizzard] = useState(true)
+  const [currentStep, setCurrentStep] = useState(0)
+  const [wizzardData, updateWizzardData] = useState({})
 
-  const handleWizzard = state => toggleWizzard(state)
-  const handleScreenMode = mode => {
-    setScreenMode(mode)
-    localStorage.setItem('screenMode', JSON.stringify(mode))
+  const handleStepChange = stepNumber => setCurrentStep(stepNumber)
+  const handleWizzardData = data => {
+    updateWizzardData({ ...wizzardData, ...data })
   }
 
   return (
-    <WizzardContext.Provider value={{ showWizzard, screenMode, handleWizzard, handleScreenMode }}>
+    <WizzardContext.Provider
+      value={{ currentStep, handleStepChange, wizzardData, handleWizzardData }}
+    >
       {children}
     </WizzardContext.Provider>
   )

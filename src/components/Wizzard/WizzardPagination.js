@@ -1,26 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 
 import { ONBOARD_STEPS } from 'config'
+import { WizzardContext } from 'contexts/WizzardContext'
 
-export default function WizzardPagination({ activeStep, setActiveStep, onStepChange }) {
+export default function WizzardPagination({ onStepChange }) {
+  const { currentStep, handleStepChange } = useContext(WizzardContext)
+  const handlePrev = () => {
+    handleStepChange(currentStep - 1)
+  }
   const handleNext = () => {
     onStepChange()
-    setActiveStep(activeStep + 1)
-  }
-  const handlePrev = () => {
-    setActiveStep(activeStep - 1)
+    handleStepChange(currentStep + 1)
   }
   return (
     <div className="wizzard-pagination__container">
       <div className="wizzard-pagination">
-        {activeStep !== 0 &&
-          activeStep < ONBOARD_STEPS.length && (
+        {currentStep !== 0 &&
+          currentStep < ONBOARD_STEPS.length && (
             <button className="wizzard__button" onClick={handlePrev}>
               Prev step
             </button>
           )}
-        {activeStep < ONBOARD_STEPS.length && (
+        {currentStep < ONBOARD_STEPS.length && (
           <button className="wizzard__button" onClick={handleNext}>
             Next step
           </button>
@@ -28,9 +29,4 @@ export default function WizzardPagination({ activeStep, setActiveStep, onStepCha
       </div>
     </div>
   )
-}
-
-WizzardPagination.propTypes = {
-  activeStep: PropTypes.number,
-  setActiveStep: PropTypes.func,
 }

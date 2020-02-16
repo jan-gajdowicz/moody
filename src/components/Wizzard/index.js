@@ -7,50 +7,37 @@ import { CloseIcon } from 'assets/icons/close'
 
 import { PRIMARY_COLOR } from 'config'
 import { AppContext } from 'contexts/AppContext'
-import { WizzardProvider } from 'contexts/WizzardContext'
+import { WizzardProvider, WizzardContext } from 'contexts/WizzardContext'
 
 export default function Wizzard({ steps, mutation, child }) {
-  const [activeStep, setActiveStep] = useState(0)
-  const [settings, saveSettings] = useState({})
-  const wizzardComplete = activeStep === steps.length
   const { handleWizzard } = useContext(AppContext)
 
-  const saveStep = (stepName, stepData) => {
-    saveSettings({ ...settings, [stepName]: stepData })
-  }
+  const { currentStep } = useContext(WizzardContext)
+  const { wizzardData } = useContext(WizzardContext)
 
-  const handleStepChange = value => {
-    setActiveStep(value)
-  }
+  const wizzardComplete = currentStep === steps.length
 
   const handleCLose = () => handleWizzard(false)
 
   if (wizzardComplete) {
-    mutation(settings)
+    mutation(wizzardData)
   }
 
   return (
-    <WizzardProvider>
-      <div className="wizzard">
-        <div className="wizzard__close" onClick={handleCLose}>
-          <Icon color={PRIMARY_COLOR} path={CloseIcon} size={50} />
-        </div>
-        <div className="wizzard__container">
-          {wizzardComplete && <WizzardComplete />}
-          {steps.map((step, order) =>
-            child({
-              handleStepChange,
-              mutation,
-              step,
-              activeStep,
-              saveStep,
-              setActiveStep,
-              order,
-            }),
-          )}
-        </div>
+    <div className="wizzard">
+      <div className="wizzard__close" onClick={handleCLose}>
+        <Icon color={PRIMARY_COLOR} path={CloseIcon} size={50} />
       </div>
-    </WizzardProvider>
+      <div className="wizzard__container">
+        {wizzardComplete && <WizzardComplete />}
+        {steps.map((step, order) =>
+          child({
+            step,
+            order,
+          }),
+        )}
+      </div>
+    </div>
   )
 }
 

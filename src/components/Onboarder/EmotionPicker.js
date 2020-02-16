@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { EMOTIONS, COLORS, buttonStyle } from 'config'
 
+import { WizzardContext } from 'contexts/WizzardContext'
 import WizzardPagination from 'components/Wizzard/WizzardPagination'
 
-export default function EmotionPicker(props) {
-  const { saveStep } = props
-  const [emotions, setEmotions] = useState([])
-  const [pagination, setPagination] = useState(false)
+export default function EmotionPicker() {
+  const {
+    wizzardData: { trackedEmotions },
+    handleWizzardData,
+  } = useContext(WizzardContext)
+  const [emotions, setEmotions] = useState(trackedEmotions ? trackedEmotions : [])
+  const [pagination, setPagination] = useState(trackedEmotions)
   const [customEmotion, setCustomEmotion] = useState({})
   const [colorIndex, setColorIndex] = useState(0)
   const [feedback, setFeedback] = useState()
+
   const isInCollection = (collection, element) =>
-    collection.length && collection.filter(elem => elem.name === element.name).length
+    collection && collection.length && collection.filter(elem => elem.name === element.name).length
 
   const addCustomEmotion = event => {
     setFeedback(null)
@@ -43,11 +48,11 @@ export default function EmotionPicker(props) {
       return setEmotions(emotions.filter(element => element.id !== emotion.id))
     }
 
-    setEmotions([...emotions, emotion])
+    emotions && setEmotions([...emotions, emotion])
     setPagination(true)
   }
 
-  const storeEmotions = () => saveStep('trackedEmotions', emotions)
+  const storeEmotions = () => handleWizzardData({ trackedEmotions: emotions })
 
   return (
     <div className="emotion-picker__container">
@@ -81,7 +86,7 @@ export default function EmotionPicker(props) {
           value={customEmotion.name}
         />
         {feedback}
-        {pagination && <WizzardPagination {...props} onStepChange={storeEmotions} />}
+        {pagination && <WizzardPagination onStepChange={storeEmotions} />}
       </div>
     </div>
   )

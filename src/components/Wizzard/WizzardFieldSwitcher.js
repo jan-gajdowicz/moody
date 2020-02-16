@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+
+import { WizzardContext } from 'contexts/WizzardContext'
 
 export default function WizzardFieldSwitcher(props) {
   const {
     step: { child },
-    activeStep,
     order,
   } = props
+  const { currentStep } = useContext(WizzardContext)
   const module = require(`./../Onboarder/${child}`)
   const WizzardField = module.default
-  const showField = activeStep === order
+  const showField = currentStep === order
 
   return (
     <>
