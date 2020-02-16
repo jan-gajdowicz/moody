@@ -59,10 +59,10 @@ const EmotionMeter = ({ order, step: { name, color }, activeStep, saveStep, setA
 
 EmotionMeter.propTypes = {
   order: PropTypes.number,
-  emotion: PropTypes.string,
-  activeInput: PropTypes.number,
-  setEmotion: PropTypes.func,
-  setActiveInput: PropTypes.func,
+  step: PropTypes.object,
+  activeStep: PropTypes.number,
+  saveStep: PropTypes.func,
+  setActiveStep: PropTypes.func,
 }
 
 export default EmotionMeter

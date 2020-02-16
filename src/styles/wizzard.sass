@@ -14,14 +14,14 @@
     top: -50px
 
   &__header
-    font-size: $fxxl
+    font-size: $fxxxl
     font-weight: $flight
     color: $cprimo
 
     &--secondary
       font-weight: $flight
       color: $cprimo
-      font-size: $fxl
+      font-size: $fxxl
       margin-bottom: $sdouble
 
   &__close
@@ -29,6 +29,31 @@
     right: 80px
     top: 50px
     cursor: pointer
+
+  &__button
+    border: $bstandard
+    color: $cprimo
+    padding: $sbase $sbase * 1.5
+    border-radius: $brad
+    font-weight: $fbold
+    cursor: pointer
+    font-size: 15px
+    background: transparent
+    margin-left: 10px
+    text-transform: uppercase
+
+  &__input
+    &--text
+      padding: $sbase
+      font-size: $flg
+      background: transparent
+      color: $cprimo
+      border: none
+      border-bottom: $bstandard
+      font-weight: $fbold
+      text-align: center
+      &:focus
+        outline: none
 
 .--dark .wizzard
   background: $cdark
