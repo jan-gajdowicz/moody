@@ -5,6 +5,7 @@ import { AppDataProvider } from './contexts/AppContext'
 
 import DashboardPage from './pages/DashboardPage'
 import HomePage from './pages/HomePage'
+import WelcomePage from './pages/WelcomePage'
 import LoginPage from './pages/LoginPage'
 import Layout from './components/Layout'
 
@@ -18,6 +19,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <HomePage />
+            </Route>
+            <Route exact path="/welcome">
+              <WelcomePage />
             </Route>
             <Route exact path="/login">
               <LoginPage />

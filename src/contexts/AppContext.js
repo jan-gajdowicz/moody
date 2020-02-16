@@ -10,16 +10,16 @@ const AppDataProvider = ({ children }) => {
     : SCREEN_MODE
 
   const [screenMode, setScreenMode] = useState(initScreenMode)
-  const [showMoodLogger, toggleMoodLogger] = useState(false)
+  const [showWizzard, toggleWizzard] = useState(false)
 
-  const handleMoodLogger = state => toggleMoodLogger(state)
+  const handleWizzard = state => toggleWizzard(state)
   const handleScreenMode = mode => {
     setScreenMode(mode)
     localStorage.setItem('screenMode', JSON.stringify(mode))
   }
 
   return (
-    <AppContext.Provider value={{ showMoodLogger, screenMode, handleMoodLogger, handleScreenMode }}>
+    <AppContext.Provider value={{ showWizzard, screenMode, handleWizzard, handleScreenMode }}>
       {children}
     </AppContext.Provider>
   )

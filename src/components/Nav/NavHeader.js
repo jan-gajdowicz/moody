@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import ScreenModeSwitcher from './ScreenModeSwitcher'
 
-import { AppContext } from '../contexts/AppContext'
+import { AppContext } from 'contexts/AppContext'
 
 const NavHeader = () => {
-  const { handleMoodLogger } = useContext(AppContext)
+  const { handleWizzard } = useContext(AppContext)
 
-  const handleButton = () => handleMoodLogger(true)
+  const handleButton = () => handleWizzard(true)
 
   return (
     <div className="nav-header__container">

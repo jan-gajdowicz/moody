@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { SCOPES } from '../config'
+import { SCOPES } from 'config'
 
 const GraphScope = ({ updateScope }) => {
   const handleScopeChange = event => {

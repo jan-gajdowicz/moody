@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from './Icon'
-import { SunIcon } from '../assets/icons/sun'
-import { MoonIcon } from '../assets/icons/moon'
+import Icon from 'components/Icon'
+import { SunIcon } from 'assets/icons/sun'
+import { MoonIcon } from 'assets/icons/moon'
 
-import { AppContext } from '../contexts/AppContext'
+import { AppContext } from 'contexts/AppContext'
 
 const ScreenModeSwitcher = ({ classProp }) => {
   const { screenMode, handleScreenMode } = useContext(AppContext)

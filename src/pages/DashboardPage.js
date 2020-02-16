@@ -5,9 +5,9 @@ import api from '../api'
 
 import MoodLogger from './../components/MoodLogger'
 import MoodGraph from '../components/MoodGraph'
-import GraphFilters from '../components/GraphFilters'
-import GraphScope from '../components/GraphScope'
-import NavHeader from '../components/NavHeader'
+import GraphFilters from '../components/Graph/GraphFilters'
+import GraphScope from '../components/Graph/GraphScope'
+import NavHeader from '../components/Nav/NavHeader'
 import { DEFAULT_SCOPE } from '../config'
 
 const DashboardPage = () => {
@@ -18,7 +18,7 @@ const DashboardPage = () => {
   const [filters, setFilters] = useState([])
   const [scopedMoods, setScopedMoods] = useState(sliceMoods(DEFAULT_SCOPE))
 
-  const { showMoodLogger } = useContext(AppContext)
+  const { showWizzard } = useContext(AppContext)
 
   const updateFilters = filters => setFilters(filters)
   const updateScope = scope => setScopedMoods(sliceMoods(scope))
@@ -48,7 +48,7 @@ const DashboardPage = () => {
           <GraphScope updateScope={updateScope} />
         </div>
         <MoodGraph filters={filters} scopedMoods={scopedMoods} />
-        {showMoodLogger && <MoodLogger />}
+        {showWizzard && <MoodLogger />}
       </div>
     </>
   )
