@@ -29,11 +29,11 @@ export default function Wizzard({ steps, mutation, child }) {
   }
 
   return (
-    <div className="mood-logger">
-      <div className="mood-logger__close" onClick={handleCLose}>
+    <div className="wizzard">
+      <div className="wizzard__close" onClick={handleCLose}>
         <Icon color={PRIMARY_COLOR} path={CloseIcon} size={50} />
       </div>
-      <div className="mood-logger__container">
+      <div className="wizzard__container">
         {wizzardComplete && <WizzardComplete />}
         {steps.map((step, order) =>
           child({

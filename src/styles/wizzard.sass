@@ -1,0 +1,37 @@
+.wizzard
+  display: flex
+  justify-content: center
+  align-items: center
+  position: fixed
+  width: 100vw
+  height: 100vh
+  top: 0
+  left: 0
+
+  &__container
+    max-width: 600px
+    position: relative
+    top: -50px
+
+  &__header
+    font-size: $fxxl
+    font-weight: $flight
+    color: $cprimo
+
+    &--secondary
+      font-weight: $flight
+      color: $cprimo
+      font-size: $fxl
+      margin-bottom: $sdouble
+
+  &__close
+    position: absolute
+    right: 80px
+    top: 50px
+    cursor: pointer
+
+.--dark .wizzard
+  background: $cdark
+
+.--light .wizzard
+  background: $clight
