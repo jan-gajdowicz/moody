@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { EMOTIONS, COLORS } from 'config'
 
 import { WizzardContext } from 'contexts/WizzardContext'
+import { AppContext } from 'contexts/AppContext'
 import WizzardPagination from 'components/Wizzard/WizzardPagination'
 import SmartButton from 'components/SmartButton'
 
@@ -10,6 +11,7 @@ export default function EmotionPicker() {
     wizzardData: { trackedEmotions },
     handleWizzardData,
   } = useContext(WizzardContext)
+  const { handleToast } = useContext(AppContext)
 
   const [emotions, setEmotions] = useState(trackedEmotions ? trackedEmotions : [])
   const [customEmotion, setCustomEmotion] = useState({})
@@ -34,7 +36,7 @@ export default function EmotionPicker() {
     if (key === 'Enter') {
       if (isInCollection(EMOTIONS, customEmotion)) {
         setCustomEmotion({ name: '' })
-        return setFeedback('already in emotions')
+        return handleToast('Name already exists', 3000)
       }
       setEmotions([...emotions, customEmotion])
       EMOTIONS.push(customEmotion)
@@ -47,7 +49,6 @@ export default function EmotionPicker() {
     if (isInCollection(emotions, emotion)) {
       return setEmotions(emotions.filter(element => element.id !== emotion.id))
     }
-
     emotions && setEmotions([...emotions, emotion])
   }
 
