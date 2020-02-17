@@ -3,6 +3,7 @@ import { EMOTIONS, COLORS } from 'config'
 
 import { WizzardContext } from 'contexts/WizzardContext'
 import { AppContext } from 'contexts/AppContext'
+
 import WizzardPagination from 'components/Wizzard/WizzardPagination'
 import SmartButton from 'components/SmartButton'
 
@@ -16,14 +17,9 @@ export default function EmotionPicker() {
   const [emotions, setEmotions] = useState(trackedEmotions ? trackedEmotions : [])
   const [customEmotion, setCustomEmotion] = useState({})
   const [colorIndex, setColorIndex] = useState(0)
-  const [feedback, setFeedback] = useState()
-
-  const isInCollection = (collection, element) =>
-    collection && collection.length && collection.filter(elem => elem.name === element.name).length
 
   const addCustomEmotion = event => {
-    setFeedback(null)
-
+    handleToast(null)
     const {
       currentTarget: { value },
       key,
@@ -34,9 +30,9 @@ export default function EmotionPicker() {
     setCustomEmotion({ id: `userEmotion_${Date.now()}`, name: value, color: COLORS[colorIndex] })
 
     if (key === 'Enter') {
-      if (isInCollection(EMOTIONS, customEmotion)) {
-        setCustomEmotion({ name: '' })
-        return handleToast('Name already exists', 3000)
+      if (EMOTIONS.filter(emotion => emotion.name === customEmotion.name).length) {
+        handleToast('Name already exists', 3000)
+        return setCustomEmotion({ name: '' })
       }
       setEmotions([...emotions, customEmotion])
       EMOTIONS.push(customEmotion)
@@ -46,7 +42,7 @@ export default function EmotionPicker() {
   }
 
   const toggleEmotion = emotion => () => {
-    if (isInCollection(emotions, emotion)) {
+    if (emotions.includes(emotion)) {
       return setEmotions(emotions.filter(element => element.id !== emotion.id))
     }
     emotions && setEmotions([...emotions, emotion])
@@ -54,7 +50,7 @@ export default function EmotionPicker() {
 
   const storeEmotions = () => handleWizzardData({ trackedEmotions: emotions })
 
-  const pagination = emotions.length ? <WizzardPagination onStepChange={storeEmotions} /> : null
+  const Pagination = emotions.length ? <WizzardPagination onStepChange={storeEmotions} /> : null
 
   return (
     <div className="emotion-picker__container">
@@ -67,7 +63,7 @@ export default function EmotionPicker() {
               <SmartButton
                 color={color}
                 handleChange={toggleEmotion(emotion)}
-                isChecked={isInCollection(emotions, emotion)}
+                isChecked={emotions.includes(emotion)}
                 key={index}
                 onClick={toggleEmotion(emotion)}
                 text={name}
@@ -82,8 +78,7 @@ export default function EmotionPicker() {
           onKeyDown={addCustomEmotion}
           value={customEmotion.name}
         />
-        {feedback}
-        {pagination}
+        {Pagination}
       </div>
     </div>
   )

@@ -1,15 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { buttonStyle } from 'config'
 
 export default function SmartButton({ color, text, isChecked, handleChange }) {
-  const style = buttonStyle(isChecked, color)
+  const style = isChecked
+    ? {
+        color: `${color}`,
+        borderColor: `${color}`,
+        background: `linear-gradient(${color} -900%, transparent 100%)`,
+      }
+    : null
 
   return (
-    <label className="graph-filters__filter" htmlFor={text} style={style}>
+    <label className="smart-button__label" htmlFor={text} style={style}>
       <input
         checked={isChecked}
-        className="graph-filters__input"
+        className="smart-button__input"
         id={text}
         name={text}
         onChange={handleChange}
@@ -23,6 +28,6 @@ export default function SmartButton({ color, text, isChecked, handleChange }) {
 SmartButton.propTypes = {
   color: PropTypes.string,
   text: PropTypes.string,
-  isChecked: PropTypes.number,
+  isChecked: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   handleChange: PropTypes.func,
 }

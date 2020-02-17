@@ -5,10 +5,11 @@ export const EMOTIONS = [
   { name: 'focus', color: '#FF8042', id: 4 },
 ]
 export const COLORS = ['#ff0000', '#ffff00', '#00ffff', '#00ff00', '	#ff00ff']
+export const TRACKING_HOURS = ['09:00', '12:00', '15:00', '18:00', '21:00']
 export const ONBOARD_STEPS = [
   { name: 'emotions', child: 'EmotionPicker', showPagination: true },
-  // { name: 'scale', child: 'ScalePicker', showPagination: true },
   { name: 'time', child: 'TimePicker', showPagination: true },
+  // { name: 'scale', child: 'ScalePicker', showPagination: true },
 ]
 export const SCOPES = [
   { name: 'week', value: 7 },
@@ -25,14 +26,9 @@ export const PRIMARY_COLOR = '#a88ee6'
 export const buttonStyle = (condition, color) => {
   if (condition) {
     return {
-      border: `2px solid ${color}`,
       color: `${color}`,
+      borderColor: `${color}`,
       background: `linear-gradient(${color} -900%, transparent 100%)`,
     }
-  } else
-    return {
-      border: '2px solid #ccc',
-      color: '#bbb',
-      background: 'transparent',
-    }
+  }
 }

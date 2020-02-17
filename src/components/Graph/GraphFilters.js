@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { EMOTIONS, buttonStyle } from 'config'
 
+import SmartButton from 'components/SmartButton'
+
 const GraphFilters = ({ updateFilters }) => {
   useEffect(() => updateFilters(filters))
   const [filters, setFilters] = useState(EMOTIONS)
@@ -21,20 +23,14 @@ const GraphFilters = ({ updateFilters }) => {
       <div className="graph-filters__filters">
         {EMOTIONS.map((emotion, index) => {
           const { name, color } = emotion
-          const style = buttonStyle(isInFilters(emotion), color)
-
           return (
-            <label className="graph-filters__filter" htmlFor={name} key={index} style={style}>
-              <input
-                checked={isInFilters(emotion)}
-                className="graph-filters__input"
-                id={name}
-                name={name}
-                onChange={filterEmotions(emotion)}
-                type="checkbox"
-              />
-              {name}
-            </label>
+            <SmartButton
+              color={color}
+              handleChange={filterEmotions(emotion)}
+              isChecked={isInFilters(emotion)}
+              key={index}
+              text={name}
+            />
           )
         })}
       </div>

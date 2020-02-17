@@ -20,7 +20,7 @@
 
     &--secondary
       animation: slideIn 1000ms
-      font-weight: $flight
+      font-weight: $fweight
       color: $cprimo
       font-size: $fxxl
       margin-bottom: $sdouble
@@ -38,10 +38,10 @@
     border-radius: $brad
     font-weight: $fbold
     cursor: pointer
-    font-size: 15px
-    margin-left: 10px
+    font-size: $fsize
     text-transform: uppercase
     background: transparent
+    animation: slideIn 500ms
     &--primary
       border: $bstandard
       padding: $sbase $sbase * 1.5
@@ -72,11 +72,3 @@
 
 .--light .wizzard
   background: $clight
-
-  @keyframes slideIn
-    0%
-      opacity: 0
-      margin-left: -20px
-    100%
-      opacity: 1
-      margin-left: 0

@@ -2,6 +2,7 @@
 $cprimo: #a88ee6
 $cdark: #222
 $clight: #fff
+$cdisabled: #aaa
 
 //SIZES
 $sbase: 10px
@@ -16,10 +17,16 @@ $flg: 21px
 $fxl: 28px
 $fxxl: 42px
 $fxxxl: 84px
-$fweight: 400
+$fweight: 300
 $fbold: 700
 $flight: 200
 
 //BORDERS
-$bstandard: 2px solid $cprimo
+$bstyle: solid
 $brad: 3px
+$bwidth: 3px
+$bstandard: $bwidth $bstyle $cprimo
+$bdisabled: $bwidth $bstyle $cdisabled
+
+//TIMES
+$tbase: 300ms
