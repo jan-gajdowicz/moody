@@ -3,6 +3,8 @@ import React from 'react'
 import { EMOTIONS } from 'config'
 import { insertMood } from 'api'
 
+import { WizzardProvider } from 'contexts/WizzardContext'
+
 import EmotionMeter from './EmotionMeter'
 import Wizzard from './Wizzard'
 
@@ -17,5 +19,9 @@ export default function MoodLoggerForm() {
     insertMood(mood)
   }
 
-  return <Wizzard child={EmotionMeter} mutation={storeMood} steps={EMOTIONS} />
+  return (
+    <WizzardProvider>
+      <Wizzard child={EmotionMeter} mutation={storeMood} steps={EMOTIONS} />
+    </WizzardProvider>
+  )
 }
