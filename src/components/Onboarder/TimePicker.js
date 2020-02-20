@@ -13,31 +13,41 @@ export default function TimePicker() {
     wizzardData: { trackingTime },
     handleWizzardData,
   } = useContext(WizzardContext)
+
   const { handleToast } = useContext(AppContext)
 
-  const [time, setTime] = useState(trackingTime ? trackingTime : TRACKING_HOURS[0])
+  const [time, setTime] = useState(trackingTime ? trackingTime : null)
   const [customTime, setCustomTime] = useState('')
   const [colorIndex, setColorIndex] = useState(0)
 
+  const timeFormat = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
   const addCustomTime = event => {
     const {
       currentTarget: { value },
       key,
     } = event
 
-    if (!value) return false
+    if (!value) return setCustomTime('')
 
     setCustomTime(value)
 
+    const isRightTimeFormat = timeFormat.exec(value)
+
     if (key === 'Enter') {
-      if (TRACKING_HOURS.indexOf(value)) {
+      if (TRACKING_HOURS.indexOf(value) > 0) {
         handleToast('Time already exists', 3000)
-        return setCustomTime(null)
+        return setCustomTime('')
       }
-      setCustomTime(customTime)
-      TRACKING_HOURS.push(customTime)
+
+      if (!isRightTimeFormat) {
+        handleToast('Please enter time in a 24hr format (HH:MM)', 5000)
+        return setCustomTime('')
+      }
+
+      TRACKING_HOURS.push(value)
       setColorIndex(colorIndex + 1)
-      setCustomTime(value)
+      setTime(value)
+      setCustomTime('')
     }
   }
 
@@ -47,7 +57,7 @@ export default function TimePicker() {
 
   const storeTime = () => handleWizzardData({ trackingTime: time })
 
-  const pagination = time.length ? <WizzardPagination onStepChange={storeTime} /> : null
+  const pagination = time ? <WizzardPagination onStepChange={storeTime} /> : null
 
   return (
     <div className="emotion-picker__container">

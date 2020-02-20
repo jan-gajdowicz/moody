@@ -22,6 +22,7 @@ export const SCALE = [0, 1, 2, 3, 4, 5]
 export const TEST_DELAY = 500
 export const SCREEN_MODE = '--dark'
 export const PRIMARY_COLOR = '#a88ee6'
+export const SHOW_WIZZARD = true
 
 export const buttonStyle = (condition, color) => {
   if (condition) {

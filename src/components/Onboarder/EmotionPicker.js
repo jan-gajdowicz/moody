@@ -25,7 +25,7 @@ export default function EmotionPicker() {
       key,
     } = event
 
-    if (!value) return false
+    if (!value) return setCustomEmotion({ name: '' })
 
     setCustomEmotion({ id: `userEmotion_${Date.now()}`, name: value, color: COLORS[colorIndex] })
 
