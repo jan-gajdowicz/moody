@@ -1,0 +1,75 @@
+.wizzard
+  display: flex
+  justify-content: center
+  align-items: center
+  position: fixed
+  width: 100vw
+  height: 100vh
+  top: 0
+  left: 0
+
+  &__container
+    max-width: 600px
+    position: relative
+    top: -50px
+
+  &__header
+    font-size: $fxxxl
+    font-weight: $flight
+    color: $cprimo
+
+    &--secondary
+      animation: slideIn 1000ms
+      font-weight: $fweight
+      color: $cprimo
+      font-size: $fxxl
+      margin-bottom: $sdouble
+
+  &__close
+    position: absolute
+    right: 80px
+    top: 50px
+    cursor: pointer
+
+  &__button
+    border: $bstandard
+    color: $cprimo
+    margin: $sbase
+    padding: $sbase $sbase * 1.5
+    border-radius: $brad
+    font-weight: $fbold
+    cursor: pointer
+    font-size: $fsize
+    text-transform: uppercase
+    background: transparent
+    animation: slideIn 500ms both
+    &--primary
+      border: $bstandard
+      padding: $sbase $sbase * 1.5
+      border-radius: $brad
+      font-weight: $fbold
+      cursor: pointer
+      font-size: 15px
+      margin-left: 10px
+      background: $cprimo
+      text-transform: uppercase
+      color: $cdark
+
+  &__input
+    &--text
+      padding: $sbase
+      font-size: $flg
+      background: transparent
+      color: $cprimo
+      border: none
+      border-bottom: $bstandard
+      font-weight: $fbold
+      text-align: center
+      &:focus
+        outline: none
+
+.--dark .wizzard
+  background: $cdark
+
+.--light .wizzard
+  background: $clight

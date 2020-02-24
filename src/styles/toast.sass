@@ -1,0 +1,20 @@
+.toast
+  &__container
+    position: fixed
+    border-radius: $brad
+    border: $bstandard
+    min-width: 200px
+    padding: $sdouble
+    right: $sdouble
+
+  &__close
+    position: absolute
+  &__message
+    color: $cprimo
+    font-size: $flg
+
+.--dark .toast__container
+  background: $cdark
+
+.--light .toast__container
+  background: $clight

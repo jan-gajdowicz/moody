@@ -2,6 +2,7 @@
 $cprimo: #a88ee6
 $cdark: #222
 $clight: #fff
+$cdisabled: #aaa
 
 //SIZES
 $sbase: 10px
@@ -11,15 +12,21 @@ $squad: $sbase * 4
 
 //FONTS
 $ffam: 'Roboto'
-$freg: 14px
+$fsize: 14px
 $flg: 21px
 $fxl: 28px
 $fxxl: 42px
-$fxxl: 84px
-$fweight: 400
+$fxxxl: 84px
+$fweight: 300
 $fbold: 700
 $flight: 200
 
 //BORDERS
-$bstandard: 2px solid $cprimo
+$bstyle: solid
 $brad: 3px
+$bwidth: 3px
+$bstandard: $bwidth $bstyle $cprimo
+$bdisabled: $bwidth $bstyle $cdisabled
+
+//TIMES
+$tbase: 300ms

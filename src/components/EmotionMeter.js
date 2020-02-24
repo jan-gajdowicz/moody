@@ -1,25 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { SCALE, TEST_DELAY } from '../config'
 
-const EmotionMeter = ({
-  order,
-  emotion: { name, color },
-  activeInput,
-  setEmotion,
-  setActiveInput,
-}) => {
+import { WizzardContext } from 'contexts/WizzardContext'
+
+const EmotionMeter = ({ order, step: { name, color }, saveStep }) => {
   const [value, setValue] = useState(0)
+  const { currentStep, handleStepChange } = useContext(WizzardContext)
+  const { wizzardData, handleWizzardData } = useContext(WizzardContext)
   const [touched, markAsTouched] = useState(false)
 
-  const active = activeInput === order ? '--active' : ''
+  const active = currentStep === order ? '--active' : ''
 
-  const handleInputChange = index => () => {
-    setValue(index)
+  const handleInputChange = value => () => {
+    setValue(value)
     markAsTouched(true)
-    setEmotion({ [name]: index })
-    setTimeout(() => setActiveInput(order + 1), TEST_DELAY)
+    handleWizzardData({ [name]: value })
+    setTimeout(() => handleStepChange(order + 1), TEST_DELAY)
   }
 
   return (
@@ -65,10 +63,8 @@ const EmotionMeter = ({
 
 EmotionMeter.propTypes = {
   order: PropTypes.number,
-  emotion: PropTypes.string,
-  activeInput: PropTypes.number,
-  setEmotion: PropTypes.func,
-  setActiveInput: PropTypes.func,
+  step: PropTypes.object,
+  saveStep: PropTypes.func,
 }
 
 export default EmotionMeter

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { EMOTIONS } from '../config'
+import { EMOTIONS } from 'config'
+
+import SmartButton from 'components/SmartButton'
 
 const GraphFilters = ({ updateFilters }) => {
   useEffect(() => updateFilters(filters))
@@ -21,29 +23,14 @@ const GraphFilters = ({ updateFilters }) => {
       <div className="graph-filters__filters">
         {EMOTIONS.map((emotion, index) => {
           const { name, color } = emotion
-          const style = isInFilters(emotion)
-            ? {
-                border: `2px solid ${color}`,
-                color: `${color}`,
-                background: `linear-gradient(${color} -900%, transparent 100%)`,
-              }
-            : {
-                border: '2px solid #ccc',
-                color: '#bbb',
-                background: 'transparent',
-              }
           return (
-            <label className="graph-filters__filter" htmlFor={name} key={index} style={style}>
-              <input
-                checked={isInFilters(emotion)}
-                className="graph-filters__input"
-                id={name}
-                name={name}
-                onChange={filterEmotions(emotion)}
-                type="checkbox"
-              />
-              {name}
-            </label>
+            <SmartButton
+              color={color}
+              handleChange={filterEmotions(emotion)}
+              isChecked={isInFilters(emotion)}
+              key={index}
+              text={name}
+            />
           )
         })}
       </div>
