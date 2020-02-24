@@ -21,6 +21,7 @@ export default function TimePicker() {
   const [colorIndex, setColorIndex] = useState(0)
 
   const timeFormat = new RegExp('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')
+
   const addCustomTime = event => {
     const {
       currentTarget: { value },
