@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { lazy, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { AppContext } from '../contexts/AppContext'
-import Toast from '../components/Toast'
 
 import '../App.sass'
+
+const Toast = lazy(() => import('../components/Toast'))
 
 export default function Layout({ children }) {
   const { screenMode, toast } = useContext(AppContext)
