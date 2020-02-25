@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { Suspense, lazy, useState, useEffect, useContext } from 'react'
 
 import { AppContext } from '../contexts/AppContext'
 import api from '../api'
 
-import MoodLogger from './../components/MoodLogger'
-import MoodGraph from '../components/MoodGraph'
-import GraphFilters from '../components/Graph/GraphFilters'
-import GraphScope from '../components/Graph/GraphScope'
-import NavHeader from '../components/Nav/NavHeader'
+import MoodGraph from 'components/MoodGraph'
+import GraphFilters from 'components/Graph/GraphFilters'
+import GraphScope from 'components/Graph/GraphScope'
+import NavHeader from 'components/Nav/NavHeader'
+import Loader from 'components/Loader'
+
 import { DEFAULT_SCOPE } from '../config'
+
+const MoodLogger = lazy(() => import('./../components/MoodLogger'))
 
 const DashboardPage = () => {
   const sliceMoods = scope => {
@@ -48,7 +51,11 @@ const DashboardPage = () => {
           <GraphScope updateScope={updateScope} />
         </div>
         <MoodGraph filters={filters} scopedMoods={scopedMoods} />
-        {showWizzard && <MoodLogger />}
+        {showWizzard && (
+          <Suspense fallback={<Loader />}>
+            <MoodLogger />
+          </Suspense>
+        )}
       </div>
     </>
   )
