@@ -1,15 +1,21 @@
-import React, { Suspense, lazy } from 'react'
+import React, { useContext, Suspense, lazy } from 'react'
+import { Redirect } from 'react-router-dom'
 
+import { AppContext } from 'contexts/AppContext'
 import Loader from 'components/Loader'
 
 const Onboarder = lazy(() => import('components/Onboarder'))
 
 export default function WelcomePage() {
+  const { showWelcomePage, showWizzard, handleWizzard } = useContext(AppContext)
+  if (showWelcomePage) {
+    handleWizzard(true)
+  }
   return (
     <div className="welcome-page__container">
-      <h1 className="welcome-page__header">Hi, lets chat</h1>
       <Suspense fallback={<Loader />}>
-        <Onboarder />
+        {showWizzard && <Onboarder />}
+        {!showWelcomePage && <Redirect to="/dashboard" />}
       </Suspense>
     </div>
   )

@@ -12,6 +12,7 @@ const AppDataProvider = ({ children }) => {
   const [screenMode, setScreenMode] = useState(initScreenMode)
   const [showWizzard, toggleWizzard] = useState(SHOW_WIZZARD)
   const [toast, toggleToast] = useState(false)
+  const [showWelcomePage, toggleWelcomePage] = useState(true)
 
   const handleWizzard = state => toggleWizzard(state)
   const handleToast = (message, lifespan) => {
@@ -35,6 +36,8 @@ const AppDataProvider = ({ children }) => {
         screenMode,
         handleWizzard,
         handleScreenMode,
+        showWelcomePage,
+        toggleWelcomePage,
       }}
     >
       {children}
