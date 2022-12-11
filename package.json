@@ -49,6 +49,6 @@
   "devDependencies": {
     "@selleo/eslint-config-react": "^1.0.0",
     "eslint": "^6.7.2",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
